@@ -9,6 +9,10 @@ const server = require('./server')
 // })
 
 describe('server.js', function () {
+
+    // it('should set test env', () => {
+    //     expect(process.env.DB_ENV).toBe('development')
+    // })
     describe('GET /', function () {
 
         it('should return 200 ok', function () {

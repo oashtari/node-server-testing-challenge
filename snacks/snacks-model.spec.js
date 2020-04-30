@@ -1,11 +1,31 @@
-const request = require('supertest');
+const db = require('../data/db-config');
+
+const Snacks = require('./snacks-model');
+
+describe('snacks model', () => {
+    describe('insert()', () => {
+        it('should insert snacks into the db', async () => {
+            await Snacks.insert({ name: "gummy", count: 4 });
+            await Snacks.insert({ name: "chocolate", count: 2 });
+
+            const addedSnacks = await db('snacks');
+            expect(addedSnacks).toHaveLength(2);
+        })
+
+        it('should add a single snack', async () => {
+            let snack = await Snacks.insert({ name: "bean", count: 674 })
+            expect(snack.name).toBe('bean')
+            expect(snack.count).toBe(674)
+
+            snack = await Snacks.insert({ name: "orange", count: 6 })
+            expect(snack.name).toBe('orange')
+            expect(snack.count).toBe(6)
+        })
+    })
+})
+
+beforeEach(async () => {
+    await db('snacks').truncate();
+})
 
 
-const server = require('../api/server');
-
-
-// describe('server', () => {
-//     it('should set the testing environment', () => {
-//         expect(process.env.DB_ENV).toBe('testing')
-//     })
-// })
