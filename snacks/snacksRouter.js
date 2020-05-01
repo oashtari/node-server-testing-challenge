@@ -3,17 +3,6 @@ const Snacks = require('./snacks-model')
 const router = express.Router()
 
 
-
-// router.get("/api/snacks", (req, res) => {
-//     Snacks.getAll()
-//         .then(snacks => {
-//             res.status(200).json(snacks);
-//         })
-//         .catch(error => {
-//             res.status(500).json(error);
-//         });
-// });
-
 router.post("/", (req, res) => {
     const snack = req.body;
     console.log('snack', snack)
