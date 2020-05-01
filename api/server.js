@@ -1,10 +1,13 @@
 const express = require("express");
 
+const snacksRouter = require('../snacks/snacksRouter');
 const Snacks = require('../snacks/snacks-model')
 
 const server = express();
 
 server.use(express.json());
+
+server.use('/api/snacks', snacksRouter)
 
 server.get("/", (req, res) => {
     res.status(200).json({ api: "up" });

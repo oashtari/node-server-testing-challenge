@@ -9,12 +9,27 @@ module.exports = {
 };
 
 
-async function insert(snack) {
-    const [id] = await db('snacks').insert(snack, 'id');
-    return db('snacks').where({ id }).first()
+// async function insert(snack) {
+//     const [id] = await db('snacks').insert(snack, 'id');
+//     return db('snacks').where({ id }).first()
+// }
+
+// async function add(color) {
+//     const [id] = await db('color').insert(color)
+//     return findById(id)
+// }
+
+function insert(snack) {
+    return db("snacks")
+        .insert(snack, "id")
+        // .where({ id })
+        // .first()
+        .then(ids => {
+            const [id] = ids;
+
+            return findById(id);
+        });
 }
-
-
 
 async function update(id, changes) {
     return null;
@@ -31,17 +46,16 @@ function getAll() {
 }
 
 function findById(id) {
-    return null;
+    return db('snacks')
+        .where({ id })
+        .first()
 }
 
 
 
 // const db = require('../database/db-config')
 
-// async function add(color) {
-//     const [id] = await db('color').insert(color)
-//     return findById(id)
-// }
+
 
 // function list() {
 //   return db('color')
@@ -73,3 +87,38 @@ function findById(id) {
 //     update,
 //     destroy,
 // }
+
+// const db = require('../data/db-config');
+
+// module.exports = {
+//     find,
+//     findBy,
+//     findById,
+//     add,
+//     remove
+// }
+
+// function find() {
+//     return db('departments')
+// };
+
+// function findBy(filter) {
+//     return db('departments')
+//         .where(filter)
+// };
+
+// function findById(id) {
+//     return db('departments')
+//         .where({ id })
+// };
+
+// function add(newDept) {
+//     return db('departments')
+//         .insert(newDept)
+// };
+
+// function remove(id) {
+//     return db('departments')
+//         .where({ id })
+//         .delete()
+// };
