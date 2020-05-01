@@ -2,7 +2,7 @@ const db = require('../data/db-config');
 
 module.exports = {
     insert,
-    update,
+    // update,
     remove,
     getAll,
     findById,
@@ -31,9 +31,9 @@ function insert(snack) {
         });
 }
 
-async function update(id, changes) {
-    return null;
-}
+// async function update(id, changes) {
+//     return null;
+// }
 
 function remove(id) {
     return db('snacks')

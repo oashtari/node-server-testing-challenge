@@ -34,7 +34,7 @@ router.delete("/:id", (req, res) => {
             if (deleted) {
                 res.json({ removed: deleted });
             } else {
-                res.status(404).json({ message: "CYou must keep eating this snack" });
+                res.status(404).json({ message: "You must keep eating this snack" });
             }
         })
         .catch(err => {
