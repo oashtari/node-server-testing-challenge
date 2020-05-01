@@ -4,6 +4,11 @@ const Snacks = require('./snacks-model');
 
 describe('snacks model', () => {
     describe('insert()', () => {
+
+        beforeEach(async () => {
+            await db('snacks').truncate();
+        })
+
         it('should insert snacks into the db', async () => {
             await Snacks.insert({ name: "gummy", count: 4 });
             await Snacks.insert({ name: "chocolate", count: 2 });
@@ -22,10 +27,19 @@ describe('snacks model', () => {
             expect(snack.count).toBe(6)
         })
     })
+
+    describe('remove', () => {
+        it('should remove a snack from the db', async () => {
+            await Snacks.remove(1)
+            const newSnacks = await Snacks.getAll()
+            console.log('snacks', newSnacks)
+            expect(newSnacks).toHaveLength(1)
+        })
+    })
 })
 
-beforeEach(async () => {
-    await db('snacks').truncate();
-})
+
+
+
 
 
